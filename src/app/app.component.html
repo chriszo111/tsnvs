@@ -1,3 +1,9 @@
+<base href="/">
+
 <h1>
   {{title}}
 </h1>
+
+<button *ngIf="!isAuthenticated" (click)="login()"> Login </button>
+<button *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
+<router-outlet></router-outlet>
