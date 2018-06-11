@@ -1,0 +1,26 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "tsnvs.com Website",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriszo111/tsnvs.git"
+  },
+  "keywords": [
+    "tsnvs.com",
+    "tensation",
+    "virtual",
+    "services"
+  ],
+  "author": "Chris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chriszo111/tsnvs/issues"
+  },
+  "homepage": "https://github.com/chriszo111/tsnvs#readme"
+}
