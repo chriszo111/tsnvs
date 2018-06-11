@@ -3,12 +3,11 @@ import {OktaAuthService} from "@okta/okta-angular";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
   isAuthenticated: boolean;
-  title = 'app works!';
 
   constructor(public oktaAuth: OktaAuthService) {
     // Subscribe to authentication state changes
