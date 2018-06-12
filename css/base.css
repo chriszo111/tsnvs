@@ -18,6 +18,24 @@ body {
 	animation: Gradient 15s ease infinite;
 }
 
+.btn-privacy {
+	padding: 7px;
+	border-radius: 4px;
+	border: 1px solid #aaa;
+	background-color: #eee;
+	color: #aaa;
+}
+
+.btn-privacy:hover {
+	border: 1px solid #999;
+	color: #999;
+}
+
+.content {
+	margin: auto 1em auto 1em;
+	padding: 1em 1em 1em 1em;
+}
+
 /* background animations */
 @-webkit-keyframes Gradient {
 	0% {
