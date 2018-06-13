@@ -16,15 +16,5 @@
     <button class="btn btn-outline-info" type="button" *ngIf="!isAuthenticated" (click)="login()">Login</button>
     <button class="btn btn-outline-danger" type="button" *ngIf="isAuthenticated" (click)="logout()">Logout</button>
   </form>
-</nav>
+</nav><!--nav//-->
 <br>
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
-
-<div class="navbar navbar-light bg-light fixed-bottom">
-  <span class="navbar-text">
-      Navbar text with an inline element
-    </span>
-</div>
