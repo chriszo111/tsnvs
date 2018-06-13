@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {OktaAuthService} from "@okta/okta-angular";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {OktaAuthService} from "@okta/okta-angular";
 export class AppComponent {
   isAuthenticated: boolean;
 
-  constructor(public oktaAuth: OktaAuthService) {
+  constructor(public oktaAuth: OktaAuthService, private router: Router) {
     // Subscribe to authentication state changes
     this.oktaAuth.$authenticationState.subscribe(
       (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
@@ -22,10 +23,12 @@ export class AppComponent {
   }
 
   login() {
-    this.oktaAuth.loginRedirect('/profile');
+    this.oktaAuth.loginRedirect('/dashboard');
   }
 
-  logout() {
-    this.oktaAuth.logout('/');
+  async logout() {
+    // Terminates the session with Okta and removes current tokens.
+    await this.oktaAuth.logout();
+    this.router.navigateByUrl('/');
   }
 }
