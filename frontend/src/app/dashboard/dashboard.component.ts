@@ -8,6 +8,7 @@ import {OktaAuthService} from "@okta/okta-angular";
 })
 export class DashboardComponent implements OnInit {
   isAuthenticated: boolean;
+  showTitle: boolean;
 
   constructor(private oktaAuth: OktaAuthService) {
     // Subscribe to authentication state changes
@@ -19,5 +20,15 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     // Get the authentication state for immediate use
     this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    // Show the full title
+    this.showTitle = true;
+  }
+
+  toggleTitle() {
+    if(this.showTitle) {
+      this.showTitle = false;
+    } else {
+      this.showTitle = true;
+    }
   }
 }
