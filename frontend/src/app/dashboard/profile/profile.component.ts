@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OktaAuthService} from "@okta/okta-angular";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-profile',
@@ -9,8 +10,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class ProfileComponent implements OnInit {
   isAuthenticated: boolean;
-  userProfile: any;
+  user$: any;
   httpHeaders: HttpHeaders;
+  showTitle: boolean;
 
   constructor(private oktaAuth: OktaAuthService, private http: HttpClient) {
     // Subscribe to authentication state changes
@@ -23,11 +25,24 @@ export class ProfileComponent implements OnInit {
       .set('Content-Type', 'application/json').set('Accept', 'application/json');
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     // Get user profile information of logged in user through GET
-    this.userProfile = await this.http.get('https://dev-713629.oktapreview.com/api/v1/users/me', {headers: this.httpHeaders})
-      .toPromise();
-    console.log(this.userProfile);
+    this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/me', {headers: this.httpHeaders}).toPromise();
+    console.log(this.user$);
+    // Show the full title
+    this.showTitle = true;
+  }
+
+  changePassword() {
+    console.log('changePassword() called');
+  }
+
+  toggleTitle() {
+    if(this.showTitle) {
+      this.showTitle = false;
+    } else {
+      this.showTitle = true;
+    }
   }
 
 }
