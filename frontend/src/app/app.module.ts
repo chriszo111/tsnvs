@@ -7,13 +7,17 @@ import { OktaAuthGuard, OktaAuthModule, OktaCallbackComponent } from "@okta/okta
 import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { MessageListComponent } from './message-list/message-list.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HighlightDirective } from './dashboard/highlight.directive';
-
-/* https://dev-713629.oktapreview.com/oauth2/v1/authorize?idp=0oaffxvx65klCzKXz0h7&client_id=0oaffjdfgpI5dUuIE0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=https%3A%2F%2Flocalhost:4200%2Fimplicit%2Fcallback&state=WM6D&nonce=YsG76jo */
+import {AngularFontAwesomeModule} from "angular-font-awesome";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { StockMarketComponent } from './utilities/stock-market/stock-market.component';
+import { PrivacyComponent } from './info/privacy/privacy.component';
+import { InfoComponent } from './info/info.component';
+import { ContactComponent } from './info/contact/contact.component';
+import { ToSComponent } from './info/to-s/to-s.component';
 
 const config = {
   issuer: 'https://dev-713629.oktapreview.com/oauth2/default',
@@ -52,8 +56,22 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'message',
-    component: MessageListComponent
+    path: 'info',
+    component: InfoComponent,
+    children: [
+      {
+        path: 'privacy',
+        component: PrivacyComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
+      },
+      {
+        path: 'tos',
+        component: ToSComponent
+      }
+    ]
   },
   {
     path: 'implicit/callback',
@@ -66,17 +84,23 @@ const appRoutes: Routes = [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    MessageListComponent,
     ProfileComponent,
     HeaderComponent,
     FooterComponent,
-    HighlightDirective
+    HighlightDirective,
+    StockMarketComponent,
+    PrivacyComponent,
+    InfoComponent,
+    ContactComponent,
+    ToSComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     OktaAuthModule.initAuth(config),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
