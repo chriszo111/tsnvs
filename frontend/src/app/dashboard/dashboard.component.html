@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<script type="application/javascript">
+  $('.card').hover(
+    function(){$(this).toggleClass(‘shadow-sm’);}
+  );
+</script>
+
+<div class="container">
+
+  <h1>Dashboard</h1>
+  <hr>
+  <div class="row">
+    <div class="card border-light mb-3" routerLink="profile" style="max-width: 18rem;" appHighlightDashboard>
+      <div class="card-header">Profile settings</div>
+      <div class="card-body">
+        <h5 class="card-title">Update your profile information</h5>
+        <p class="card-text">You can update your profile settings by connecting your account to one of our provided authentication services.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
