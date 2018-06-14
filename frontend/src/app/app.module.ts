@@ -21,7 +21,7 @@ import { ToSComponent } from './info/to-s/to-s.component';
 
 const config = {
   issuer: 'https://dev-713629.oktapreview.com/oauth2/default',
-  redirectUri: 'http://localhost:4200/implicit/callback',
+  redirectUri: 'https://tsnvs.com/implicit/callback',
   clientId: '0oaffjdfgpI5dUuIE0h7',
   idps: [
     { type: 'FACEBOOK', id: '0oaffxvx65klCzKXz0h7' }
