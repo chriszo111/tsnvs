@@ -19,16 +19,21 @@ export class ProfileComponent implements OnInit {
     this.oktaAuth.$authenticationState.subscribe(
       (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
     );
-
-    // Prepare httpHeaders
-    this.httpHeaders = new HttpHeaders({'Authorization': 'SSWS 00O_-EtFuB3EMJTrbnwEMGut4FQzB1X5UnlVQHlHpC'})
-      .set('Content-Type', 'application/json').set('Accept', 'application/json');
   }
 
   ngOnInit() {
+    // Get current user access token
+    const accessToken = this.oktaAuth.getAccessToken().accessToken;
+    // Prepare httpHeaders
+    this.httpHeaders = new HttpHeaders({'Authorization': 'SSWS ' + accessToken})
+      .set('Content-Type', 'application/json').set('Accept', 'application/json');
+
+    // Get user information
+    const userInfo = this.oktaAuth.getOktaAuth().token.getUserInfo(accessToken);
     // Get user profile information of logged in user through GET
     this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/me', {headers: this.httpHeaders}).toPromise();
-    console.log(this.user$);
+    console.log('user$' + this.user$);
+    console.log('userInfo: ' + userInfo);
     // Show the full title
     this.showTitle = true;
   }
