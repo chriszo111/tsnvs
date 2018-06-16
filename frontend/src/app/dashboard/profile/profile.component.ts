@@ -22,8 +22,11 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Get current user access token
-    const accessToken = this.oktaAuth.getAccessToken().accessToken;
+    if(this.isAuthenticated) {
+      // Get current user access token
+      const accessToken = this.oktaAuth.getAccessToken().accessToken;
+    }
+
     // Prepare httpHeaders
     this.httpHeaders = new HttpHeaders({'Authorization': 'SSWS ' + accessToken})
       .set('Content-Type', 'application/json').set('Accept', 'application/json');
