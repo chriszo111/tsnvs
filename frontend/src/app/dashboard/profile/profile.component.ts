@@ -10,6 +10,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class ProfileComponent implements OnInit {
   isAuthenticated: boolean;
+  accessToken: string;
   user$: any;
   httpHeaders: HttpHeaders;
   showTitle: boolean;
@@ -22,21 +23,34 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.isAuthenticated) {
+    console.log('Within ngOnInit()');
+
+    this.user$ = this.oktaAuth.getUser();
+    this.user$
+      .then((res) => {
+        console.log('user$ [oktaAuth.getUser().then(): ' + res);
+      });
+    console.log('user$ [oktaAuth.getUser()]: ' + this.user$);
+    console.log('oktaAuth.getAccessToken(): ' + this.oktaAuth.getAccessToken());
+
       // Get current user access token
-      const accessToken = this.oktaAuth.getAccessToken().accessToken;
-    }
+      // const accessToken = this.oktaAuth.getAccessToken().accessToken;
+      // Get user information
+      // const userInfo = this.oktaAuth.getOktaAuth().token.getUserInfo(accessToken);
 
-    // Prepare httpHeaders
-    this.httpHeaders = new HttpHeaders({'Authorization': 'SSWS ' + accessToken})
-      .set('Content-Type', 'application/json').set('Accept', 'application/json');
+      // Prepare httpHeaders
+      this.httpHeaders = new HttpHeaders()
+        .set('Authorization', 'Bearer ' + this.oktaAuth.getAccessToken());
 
-    // Get user information
-    const userInfo = this.oktaAuth.getOktaAuth().token.getUserInfo(accessToken);
-    // Get user profile information of logged in user through GET
-    this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/me', {headers: this.httpHeaders}).toPromise();
-    console.log('user$' + this.user$);
-    console.log('userInfo: ' + userInfo);
+      // Get user profile information of logged in user through GET
+      this.http.get('https://dev-713629.oktapreview.com/api/v1/userinfo', {headers: this.httpHeaders})
+        .subscribe((user) => {
+          this.user$ = user;
+        });
+
+    console.log('user$ [GET /v1/userinfo]: ' + this.user$);
+      //console.log('userInfo: ' + userInfo);
+
     // Show the full title
     this.showTitle = true;
   }
