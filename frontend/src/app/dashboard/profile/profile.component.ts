@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {OktaAuthService} from "@okta/okta-angular";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
+import {forEach} from "@angular/router/src/utils/collection";
+import {element} from "protractor";
+import {st} from "@angular/core/src/render3";
+import set = Reflect.set;
 
 @Component({
   selector: 'app-profile',
@@ -22,37 +26,18 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    console.log('Within ngOnInit()');
+   ngOnInit() {
+    this.user$ = this.oktaAuth.getUser().then((user) => {
+      // Got user
+        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'SSWS 0043k9gXAzA_T8NRKhSM5-ELklPZKI32anYqbsUDzw'})
+          .append('Accept', 'application/json').append('Content-Type','application/json');
 
-    this.user$ = this.oktaAuth.getUser();
-    this.user$
-      .then((res) => {
-        console.log('user$ [oktaAuth.getUser().then(): ' + res);
-      });
-    console.log('user$ [oktaAuth.getUser()]: ' + this.user$);
-    console.log('oktaAuth.getAccessToken(): ' + this.oktaAuth.getAccessToken());
-
-      // Get current user access token
-      // const accessToken = this.oktaAuth.getAccessToken().accessToken;
-      // Get user information
-      // const userInfo = this.oktaAuth.getOktaAuth().token.getUserInfo(accessToken);
-
-      // Prepare httpHeaders
-      this.httpHeaders = new HttpHeaders()
-        .set('Authorization', 'Bearer ' + this.oktaAuth.getAccessToken());
-
-      // Get user profile information of logged in user through GET
-      this.http.get('https://dev-713629.oktapreview.com/api/v1/userinfo', {headers: this.httpHeaders})
-        .subscribe((user) => {
-          this.user$ = user;
-        });
-
-    console.log('user$ [GET /v1/userinfo]: ' + this.user$);
-      //console.log('userInfo: ' + userInfo);
+        this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/' + user.sub, {headers: httpHeaders});
+        console.log(this.user$);
+    });
 
     // Show the full title
-    this.showTitle = true;
+    this.showTitle = false;
   }
 
   changePassword() {
