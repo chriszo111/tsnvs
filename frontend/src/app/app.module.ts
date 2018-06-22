@@ -18,6 +18,8 @@ import { PrivacyComponent } from './info/privacy/privacy.component';
 import { InfoComponent } from './info/info.component';
 import { ContactComponent } from './info/contact/contact.component';
 import { ToSComponent } from './info/to-s/to-s.component';
+import { PlayerComponent } from './stats/csgo/player/player.component';
+import { CsgoComponent } from './stats/csgo/csgo.component';
 
 const config = {
   issuer: 'https://dev-713629.oktapreview.com/oauth2/default',
@@ -48,6 +50,19 @@ const appRoutes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      }
+    ]
+  },
+  {
+    path: 'stats',
+    canActivate: [OktaAuthGuard],
+    data: {
+      onAuthRequired
+    },
+    children: [
+      {
+        path: 'csgo',
+        component: CsgoComponent
       }
     ]
   },
@@ -92,7 +107,9 @@ const appRoutes: Routes = [
     PrivacyComponent,
     InfoComponent,
     ContactComponent,
-    ToSComponent
+    ToSComponent,
+    PlayerComponent,
+    CsgoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
