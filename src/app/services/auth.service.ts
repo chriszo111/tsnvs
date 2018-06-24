@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "angularfire2/auth";
 import {Observable} from "rxjs/internal/Observable";
+import * as firebase from 'firebase/app'
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Observable} from "rxjs/internal/Observable";
 export class AuthService {
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
+  authenticationState$: Observable<firebase.User>;
 
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
     this.user = _firebaseAuth.authState;
@@ -27,8 +29,15 @@ export class AuthService {
   }
 
   signInRegular(email, password) {
-    const credential = firebase.auth.EmailAuthProvider.credential( email, password );
-    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
+          this.userDetails = user;
+        });
+      })
+      .catch((err) => {
+      console.error(err.code, err.message);
+    });
   }
 
   signInWithFacebook() {

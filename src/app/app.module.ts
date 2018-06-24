@@ -25,6 +25,7 @@ import { HighlightDirective } from './highlight.directive';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from "./services/auth-guard.service"; // Contains firebase config
 import { FormsModule } from '@angular/forms';
+import { AngularFireAuth } from "angularfire2/auth";
 
 @NgModule({
   declarations: [

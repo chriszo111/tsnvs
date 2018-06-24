@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import {Observable} from "rxjs/internal/Observable";
+import * as firebase from 'firebase/app'
+import { firebaseui } from 'firebaseui'
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 
@@ -12,13 +11,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user = {
+  user: any = {
     email: '',
     password: ''
   };
-  private user: Observable<firebase.User>;
+  // private user: Observable<firebase.User>;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private authService: AuthService, private router: Router) {
+  constructor(private _firebaseAuth: AngularFireAuth,
+              private authService: AuthService,
+              private router: Router
+  ) {
     this.user = _firebaseAuth.authState;
   }
 
