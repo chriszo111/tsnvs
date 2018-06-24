@@ -23,7 +23,8 @@ import { PrivacyComponent } from './info/privacy/privacy.component';
 import { ContactComponent } from './info/contact/contact.component';
 import { HighlightDirective } from './highlight.directive';
 import { LoginComponent } from './login/login.component';
-import { AuthGuardService } from "./services/auth-guard.service"; // Contains firebase configng
+import { AuthGuardService } from "./services/auth-guard.service"; // Contains firebase config
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AuthGuardService } from "./services/auth-guard.service"; // Contains fi
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

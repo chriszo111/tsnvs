@@ -26,9 +26,20 @@ export class AuthService {
     );
   }
 
+  signInRegular(email, password) {
+    const credential = firebase.auth.EmailAuthProvider.credential( email, password );
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password)
+  }
+
   signInWithFacebook() {
     return this._firebaseAuth.auth.signInWithPopup(
       new firebase.auth.FacebookAuthProvider()
+    )
+  }
+
+  signInWithGithub() {
+    return this._firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.GithubAuthProvider()
     )
   }
 
@@ -43,5 +54,4 @@ export class AuthService {
     this._firebaseAuth.auth.signOut()
       .then((res) => this.router.navigate(['/']));
   }
-}
 }
