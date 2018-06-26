@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="jumbotron jumbotron-fluid" *ngIf="showTitle;then fullTitle else smallTitle"></div>
+
+<ng-template #smallTitle>
+  <div class="navbar navbar-light bg-light">
+    <a class="navbar-brand"><i class="fa fa-gamepad"></i> Gameaccount settings</a>
+    <a class="nav-item text-right"><i class="fa fa-angle-down fa-3x" (click)="toggleTitle()"></i></a>
+  </div>
+</ng-template>
+
+<ng-template #fullTitle>
+  <div class="jumbotron jumbotron-fluid" (click)="toggleTitle">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10"><h1 class="display-4"><i class="fa fa-gamepad"></i> Gameaccount settings</h1></div>
+        <div class="col-sm-2 text-right align-middle"><i class="fa fa-angle-up fa-3x" (click)="toggleTitle()"></i></div>
+      </div>
+      <hr>
+      <p class="lead">At the moment you can only get your steam account linked to your tnsvs.com account</p>
+    </div>
+  </div>
+</ng-template>
+
+<div class="container">
+  <form class="col-sm-10">
+
+  </form>
+</div>
+
+<app-footer></app-footer>
