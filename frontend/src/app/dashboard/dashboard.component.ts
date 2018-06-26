@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     // Get the authentication state for immediate use
     this.isAuthenticated = await this.oktaAuth.isAuthenticated();
     // Show the full title
-    this.showTitle = true;
+    this.showTitle = false;
   }
 
   toggleTitle() {
