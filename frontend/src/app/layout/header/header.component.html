@@ -1,19 +1,33 @@
-<nav class="navbar navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <a class="navbar-brand" href="#">
-    <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
-    tsnvs.com <span class="badge badge-secondary badge-light">BETA</span>
+    <img src="../assets/img/tsnvs-com-logo-dark.png" width="150" class="d-inline-block align-top" alt="">
+     <span class="badge badge-secondary badge-light">BETA</span>
   </a>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link" routerLink="/">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-light" id="dropdownBasic1" ngbDropdownToggle>Gamestats</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item">Counter-Strike: Global Offensive</button>
+            <button class="dropdown-item">Rocket League</button>
+            <button class="dropdown-item">Fortnite</button>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
   </div>
 
   <form class="form-inline">
-    <button class="btn btn-outline-info" type="button" *ngIf="!isAuthenticated" (click)="login()">Login</button>
+    <button class="btn btn-outline-info" routerLink="/login" type="button" *ngIf="!isAuthenticated" (click)="login()">Login</button>
     <button class="btn btn-outline-danger" type="button" *ngIf="isAuthenticated" (click)="logout()">Logout</button>
   </form>
 </nav><!--nav//-->
