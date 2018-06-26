@@ -14,8 +14,8 @@ import set = Reflect.set;
 })
 export class ProfileComponent implements OnInit {
   isAuthenticated: boolean;
-  accessToken: string;
   user$: any;
+  user: any;
   httpHeaders: HttpHeaders;
   showTitle: boolean;
 
@@ -26,14 +26,15 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-   ngOnInit() {
-    this.user$ = this.oktaAuth.getUser().then((user) => {
+  ngOnInit() {
+    this.oktaAuth.getUser().then((user) => {
       // Got user
-        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'SSWS 0043k9gXAzA_T8NRKhSM5-ELklPZKI32anYqbsUDzw'})
-          .append('Accept', 'application/json').append('Content-Type','application/json');
-
-        this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/' + user.sub, {headers: httpHeaders});
-        console.log(this.user$);
+      this.oktaAuth.getAccessToken().then((token) => {
+        // Got access token
+        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        this.user$ = this.http.get('https://dev-713629.oktapreview.com/oauth2/default/v1/userinfo/', {headers: httpHeaders});
+        this.user$.subscribe((user) => {console.log(user)});
+      });
     });
 
     // Show the full title
