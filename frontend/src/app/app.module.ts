@@ -20,6 +20,9 @@ import { ContactComponent } from './info/contact/contact.component';
 import { ToSComponent } from './info/to-s/to-s.component';
 import { PlayerComponent } from './stats/csgo/player/player.component';
 import { CsgoComponent } from './stats/csgo/csgo.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HelpComponent } from './info/help/help.component';
+import { GameaccountComponent } from './dashboard/gameaccount/gameaccount.component';
 
 const config = {
   issuer: 'https://dev-713629.oktapreview.com/oauth2/default',
@@ -50,6 +53,10 @@ const appRoutes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'gameaccounts',
+        component: GameaccountComponent
       }
     ]
   },
@@ -85,6 +92,10 @@ const appRoutes: Routes = [
       {
         path: 'tos',
         component: ToSComponent
+      },
+      {
+        path: 'help',
+        component: HelpComponent
       }
     ]
   },
@@ -109,7 +120,9 @@ const appRoutes: Routes = [
     ContactComponent,
     ToSComponent,
     PlayerComponent,
-    CsgoComponent
+    CsgoComponent,
+    HelpComponent,
+    GameaccountComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -117,7 +130,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

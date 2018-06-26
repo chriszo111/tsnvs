@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^6.0.4",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.4",
+    "@ng-bootstrap/ng-bootstrap": "^2.1.2",
     "@okta/okta-angular": "^1.0.1",
     "@okta/okta-signin-widget": "^2.9.0",
     "angular-font-awesome": "^3.1.2",
