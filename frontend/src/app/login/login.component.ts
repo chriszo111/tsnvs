@@ -12,11 +12,22 @@ export class LoginComponent implements OnInit {
     signIn;
     widget = new OktaSignIn({
       baseUrl: 'https://dev-713629.oktapreview.com',
+      logo: '../assets/img/tsnvs-com-logo.png',
+      helpLinks: {
+        help: 'info/help'
+      },
+      authParams: {
+        issuer: 'default',
+        responseType: ['id_token','token'],
+        scopes: ['openid', 'email', 'profile', 'address', 'phone']
+      },
       idpDiscovery: {
-        requestContext: '/a/app/request/context'
+        requestContext: '/'
       },
       features: {
-        idpDiscovery: false
+        idpDiscovery: false,
+        smsRecovery: true,
+        registration: true,
       }
     });
 
