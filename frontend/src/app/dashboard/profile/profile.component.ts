@@ -31,7 +31,9 @@ export class ProfileComponent implements OnInit {
       // Got user
       this.oktaAuth.getAccessToken().then((token) => {
         // Got access token
-        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'Bearer ' + token})
+          .append('Content-Type', 'application/json')
+          .append('Accept', 'application/json');
         this.user$ = this.http.get('https://dev-713629.oktapreview.com/oauth2/default/v1/userinfo/', {headers: httpHeaders});
         this.user$.subscribe((user) => {console.log(user)});
       });
