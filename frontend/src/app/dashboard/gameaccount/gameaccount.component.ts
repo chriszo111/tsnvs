@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
   styles: []
 })
 export class GameaccountComponent implements OnInit {
-  private showTitle: boolean;
+  showTitle: boolean;
 
   constructor(private http: HttpClient, private router: Router, private oktaAuth: OktaAuthService) { }
 
