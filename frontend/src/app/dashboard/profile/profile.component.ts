@@ -28,15 +28,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.oktaAuth.getUser().then((user) => {
-      // Got user
-      this.oktaAuth.getAccessToken().then((token) => {
-        // Got access token
-        let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'Bearer ' + token})
-          .append('Content-Type', 'application/json')
-          .append('Accept', 'application/json');
-        this.user$ = this.http.get('https://dev-713629.oktapreview.com/oauth2/default/v1/userinfo/', {headers: httpHeaders});
-        this.user$.subscribe((user) => {console.log(user)});
-      });
+      // Prepare headers
+      let httpHeaders: HttpHeaders = new HttpHeaders({'Authorization': 'SSWS 00wm--IcjO9hNlv7nVhZaUtXd26gIlfo27WEKQ-7O5'})
+        .append('Content-Type','application/json')
+        .append('Accept','application/json');
+
+      console.log('user.sub: ' + user.sub);
+
+        this.user$ = this.http.get('https://dev-713629.oktapreview.com/api/v1/users/' + user.sub, {headers: httpHeaders});
     });
 
     // Show the full title
@@ -48,11 +47,6 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleTitle() {
-    if(this.showTitle) {
-      this.showTitle = false;
-    } else {
-      this.showTitle = true;
-    }
+    this.showTitle ? this.showTitle = false : this.showTitle = true;
   }
-
 }
