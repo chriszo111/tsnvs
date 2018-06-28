@@ -27,7 +27,7 @@ import { GameaccountComponent } from './dashboard/gameaccount/gameaccount.compon
 const config = {
   issuer: 'https://dev-713629.oktapreview.com/oauth2/default',
   redirectUri: 'https://tsnvs.com/implicit/callback',
-  clientId: '0oafiwd7qfU6IE4GU0h7',
+  clientId: '0oaffjdfgpI5dUuIE0h7',
   idps: [
     { type: 'FACEBOOK', id: '0oaffxvx65klCzKXz0h7' }
   ]
@@ -103,7 +103,7 @@ const appRoutes: Routes = [
     path: 'implicit/callback',
     component: OktaCallbackComponent
   }
-]
+];
 
 @NgModule({
   declarations: [
